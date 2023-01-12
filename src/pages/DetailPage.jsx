@@ -1,74 +1,76 @@
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-// import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { __getPosts } from "../redux/modules/postsSlice";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
 
-const DetailPage = () => {
-  // const dispatch = useDispatch();
+function DetailPage(props) {
   const { posts, isLoading, error } = useSelector((state) => state.posts);
-  const params = useParams();
+  console.log("dddd", posts);
   const dispatch = useDispatch();
-  const postget = posts.find((post) => post.id === parseInt(params.id));
-
-  // console.log(params.id);
-  // useEffect(() => {
-  //   dispatch(getTodoByID(Number(id)));
-  // }, [dispatch, id]);
-  // console.log(todo);
+  const navigate = useNavigate();
+  const params = useParams();
+  // const nerArr= posts.filter(function(){
+  //   return
+  // })
+  const postGet = posts.find((post) => post.id === parseInt(params.id));
   useEffect(() => {
-    dispatch(__getPosts(posts));
+    dispatch(__getPosts());
   }, []);
-  return <div className="wholePage">hello</div>;
-  // <StContainer>
-  //   <div>
-  //     <StContentBox>
-  //       Name{postget.id}.<StTitle> {postget.title}</StTitle>
-  //       <StContent>{postget.content}</StContent>
-  //       <hr />
-  //       <Link to="/">
-  //         <button className="closeDetail">닫기</button>
-  //       </Link>
-  //     </StContentBox>
-  //   </div>
-  // </StContainer>
-  // );
-};
+  const [modalindex, setModalIndex] = useState("");
+  return (
+    <>
+      <Navbar bg="light" variant="light">
+        <Container>
+          <Navbar.Brand>식사메뉴 추천 사이트</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              🏠홈으로....🏠
+            </Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+
+      <div className="detailCard">
+        <h4>
+          추천메뉴:
+          {postGet?.title}
+          <hr />
+        </h4>
+        <p> {postGet?.name}</p>
+        <p> 추천 이유 : {postGet?.content}</p>
+        <Link to={`/edit/${postGet.id}`}>
+          <StButton>수정하기</StButton>
+        </Link>
+        <StButton>삭제하기</StButton>
+      </div>
+    </>
+  );
+}
+
 export default DetailPage;
 
-const StContainer = styled.div`
-  border: 1px solid gray;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-
-  height: 600px;
-  width: 70%;
-  padding: 30px;
-  margin: auto;
-`;
-const StTitle = styled.div`
+const StButton = styled.button`
+  width: 80px;
+  height: 40px;
+  font-size: 15px;
   font-weight: bold;
-  font-size: 25px;
-  margin-top: 20px;
-`;
-const StContent = styled.div`
-  margin-top: 30px;
-  margin-bottom: 20px;
-`;
-const StContentBox = styled.div`
-  width: 400px;
-  margin: auto;
-  padding: 50px;
-`;
-const Stjinhaeng = styled.div`
-  font-weight: bold;
-  /* background-color: bisque; */
-  height: 30px;
-  align-items: center;
-  font-size: 13px;
-  justify-content: center;
-  display: flex;
+  background-color: transparent;
+  border-radius: 50px;
+  border: 2px solid gray;
   color: gray;
+  margin: 20px auto 0px auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;

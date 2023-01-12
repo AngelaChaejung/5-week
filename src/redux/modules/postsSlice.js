@@ -19,6 +19,18 @@ export const __getPosts = createAsyncThunk(
     }
   }
 );
+export const __editPost = createAsyncThunk(
+  "eidtPost",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await axios.patch("http://localhost:3001/posts");
+      console.log(data);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const __addPost = createAsyncThunk(
   "addPost",
   async (payload, thunkAPI) => {
@@ -37,6 +49,15 @@ export const postsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    [__editPost.fulfillWithValue]: (state, action) => {
+      state.isLoading = false;
+      state.posts = action.payload;
+      console.log("#", state.posts);
+    },
+    [__editPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
     [__getPosts.pending]: (state) => {
       state.isLoading = true;
     },
@@ -59,5 +80,5 @@ export const postsSlice = createSlice({
     },
   },
 });
-export const { getPosts, addPost, deletePost } = postsSlice.actions;
+export const { getPosts, addPost, deletePost, editPost } = postsSlice.actions;
 export default postsSlice.reducer;

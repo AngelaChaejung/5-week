@@ -4,7 +4,7 @@ import Home from "../pages/Home";
 import About from "../pages/About.js";
 import Recommend from "../pages/Recommend";
 import DetailPage from "../pages/DetailPage";
-
+import Edit from "../pages/EditPage";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -20,6 +20,7 @@ const Router = () => {
         <Route path="about" element={<About />} />
         <Route path="recommend" element={<Recommend />} />
         <Route path="detail/:id" element={<DetailPage />} />
+        <Route path="edit/:id" element={<Edit />} />
       </Routes>
     </BrowserRouter>
   );
