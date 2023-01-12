@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About.js";
 import Recommend from "../pages/Recommend";
+import DetailPage from "../pages/DetailPage";
 
 const Router = () => {
   return (
@@ -18,6 +19,7 @@ const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="recommend" element={<Recommend />} />
+        <Route path="detail" element={<DetailPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -13,14 +13,13 @@ function Home() {
   const [posts, setPosts] = useState(null);
   const location = useLocation();
   const fetchPosts = async () => {
-    const { data } = await axios.get("http://localhost:3001/myposts");
+    const { data } = await axios.get("http://localhost:3001/posts");
     setPosts(data);
   };
   useEffect(() => {
     fetchPosts();
   }, []);
 
-  console.log(posts);
   return (
     <div className="wholePage">
       <Navbar bg="light" variant="light">
@@ -28,7 +27,6 @@ function Home() {
           <Navbar.Brand href="#home">식사메뉴 추천 사이트</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link
-              href="#home"
               onClick={() => {
                 navigate("/");
               }}
@@ -45,7 +43,7 @@ function Home() {
         {`현재페이지: ${location.pathname.slice(1)}`},,,,,, <hr />
       </div>
       <div className="recommend">
-        오늘의 점심 메뉴 추천해주러 가기 ......
+        채정이의 오늘 점심 메뉴 추천해주러 가기 ......
         <h1
           onClick={() => {
             navigate("/recommend");
@@ -55,7 +53,7 @@ function Home() {
         </h1>
       </div>
       <div className="recommend">
-        사람들의 추천 보러 가기 ......{" "}
+        사람들의 추천 보러 가기 ......
         <h1
           onClick={() => {
             navigate("/about");
