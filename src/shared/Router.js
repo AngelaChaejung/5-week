@@ -19,7 +19,7 @@ const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="recommend" element={<Recommend />} />
-        <Route path="detail" element={<DetailPage />} />
+        <Route path="detail/:id" element={<DetailPage />} />
       </Routes>
     </BrowserRouter>
   );

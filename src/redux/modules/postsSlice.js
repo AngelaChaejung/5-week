@@ -11,8 +11,9 @@ export const __getPosts = createAsyncThunk(
   "getPosts",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get("http://localhost:3001/posts");
+      const { data } = await axios.get("http://localhost:3001/posts");
       console.log(data);
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -42,6 +43,7 @@ export const postsSlice = createSlice({
     [__getPosts.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts = action.payload;
+      console.log("#", state.posts);
     },
     [__getPosts.rejected]: (state, action) => {
       state.isLoading = false;

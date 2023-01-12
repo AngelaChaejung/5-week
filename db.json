@@ -1,8 +1,28 @@
 {
-  "myposts": [
+  "posts": [
     {
-      "id": "1",
-      "title": "react"
+      "title": "돈까스",
+      "name": "스윙스",
+      "content": "돈까스 좋아해요?",
+      "id": 0
+    },
+    {
+      "title": "쌀국수",
+      "name": "국수매니아",
+      "content": "쌀국수를 추천합니다",
+      "id": 1
+    },
+    {
+      "title": "초밥",
+      "name": "이채정",
+      "content": "초밥 진짜 맛있어",
+      "id": 2
+    },
+    {
+      "title": "방어",
+      "name": "준철님",
+      "content": "제철이니까....",
+      "id": 3
     }
   ]
 }
