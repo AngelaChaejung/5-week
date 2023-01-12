@@ -1,39 +1,40 @@
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-// import { getTodoByID } from "../redux/modules/todos";
 // import { Navigate } from "react-router-dom";
+import { __getPosts } from "../redux/modules/postsSlice";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const DetailPage = () => {
   // const dispatch = useDispatch();
-  const post = useSelector((state) => state.posts.postsSlice);
-
+  const { posts, isLoading, error } = useSelector((state) => state.posts);
   const params = useParams();
-
-  const postget = post.find((todo) => todo.id === parseInt(params.id));
+  const dispatch = useDispatch();
+  const postget = posts.find((post) => post.id === parseInt(params.id));
 
   // console.log(params.id);
   // useEffect(() => {
   //   dispatch(getTodoByID(Number(id)));
   // }, [dispatch, id]);
   // console.log(todo);
-
-  return (
-    <StContainer>
-      <div>
-        <StContentBox>
-          Name{postget.id}.<StTitle> {postget.title}</StTitle>
-          <StContent>{postget.content}</StContent>
-          <hr />
-          <Link to="/">
-            <button className="closeDetail">닫기</button>
-          </Link>
-        </StContentBox>
-      </div>
-    </StContainer>
-  );
+  useEffect(() => {
+    dispatch(__getPosts(posts));
+  }, []);
+  return <div className="wholePage">hello</div>;
+  // <StContainer>
+  //   <div>
+  //     <StContentBox>
+  //       Name{postget.id}.<StTitle> {postget.title}</StTitle>
+  //       <StContent>{postget.content}</StContent>
+  //       <hr />
+  //       <Link to="/">
+  //         <button className="closeDetail">닫기</button>
+  //       </Link>
+  //     </StContentBox>
+  //   </div>
+  // </StContainer>
+  // );
 };
-
 export default DetailPage;
 
 const StContainer = styled.div`
